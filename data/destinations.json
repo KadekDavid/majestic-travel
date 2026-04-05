@@ -1,6 +1,31 @@
 [
-  { "id": 1, "name": "Ijen", "image": "/assets/images/ijen.jpg", "tours": 1 },
-  { "id": 2, "name": "Bali", "image": "/assets/images/bali.jpg", "tours": 3 },
-  { "id": 3, "name": "Baluran, Pantai Bama", "image": "/assets/images/baluran.jpg", "tours": 4 },
-  { "id": 4, "name": "Djawatan", "image": "/assets/images/djawatan.jpg", "tours": 3 }
+  {
+    "id": "ijen",
+    "name": "Open Trip Banyuwangi",
+    "slug": "ijen",
+    "image": "/assets/images/ijen.jpg",
+    "tours": 15
+  },
+  {
+    "id": "bali",
+    "name": "Bali",
+    "slug": "bali",
+    "image": "/assets/images/bali.jpg",
+    "tours": 4
+  },
+  {
+    "id": "baluran",
+    "name": "Baluran, Pantai Bama",
+    "slug": "baluran",
+    "image": "/assets/images/baluran.jpg",
+    "tours": 1
+  },
+  {
+    "id": "djawatan",
+    "name": "Djawatan",
+    "slug": "djawatan",
+    "image": "/assets/images/djawatan.jpg",
+    "tours": 3
+  }
 ]
+

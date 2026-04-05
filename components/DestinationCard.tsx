@@ -1,20 +1,23 @@
+import Link from "next/link";
 import Image from "next/image";
 
 interface DestinationCardProps {
   name: string;
-  location?: string;   // default "INDONESIA"
+  slug: string;       
+  location?: string;
   tours: number;
   imagePath: string;
 }
 
 export default function DestinationCard({
   name,
+  slug,
   location = "INDONESIA",
   tours,
   imagePath,
 }: DestinationCardProps) {
   return (
-    <div className="card">
+    <Link href={`/paket-tour/${slug}`} className="card block">
       <Image
         src={imagePath}
         alt={name}
@@ -27,6 +30,6 @@ export default function DestinationCard({
         <h3>{name}</h3>
         <p>{tours} Paket Tour</p>
       </div>
-    </div>
+    </Link>
   );
 }

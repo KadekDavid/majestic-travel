@@ -1,11 +1,14 @@
-// components/Navbar.tsx
 "use client";
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,30 +18,106 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const navItems = [
+    { name: "Beranda", href: "/" },
+    { name: "Destinasi Wisata", href: "/destinasi" },
+    { name: "Pilihan Paket Tour", href: "/paket-tour" },
+    { name: "Sewa Kendaraan", href: "/sewa" },
+    { name: "Artikel Wisata", href: "/artikel" },
+    { name: "Tentang Kami", href: "/tentang" },
+  ];
+
   return (
-    <header className={`navbar ${scrolled ? "scrolled" : ""}`}>
-      <div className="nav-container">
+    <header
+      className={`
+        sticky top-0 z-[1000] transition-all duration-300
+        ${scrolled 
+          ? "bg-[#fff3ea]/95 shadow-md" 
+          : "bg-[#fff3ea] border-b border-black/5"
+        }
+      `}
+    >
+      <div className="max-w-[1280px] mx-auto px-6 py-4 flex items-center justify-between">
         {/* LOGO */}
-        <a href="#" className="logo">
+        <Link href="/" className="z-10 shrink-0">
           <Image
             src="/assets/images/logo.png"
             alt="Pesona Ijen"
             width={60}
             height={40}
             priority
+            className={`
+              transition-all duration-300 w-auto
+              ${scrolled ? "h-[34px]" : "h-10"}
+            `}
           />
-        </a>
+        </Link>
 
-        {/* MENU (CENTER) */}
-        <nav className="nav-menu">
-          <a href="#" className="active">Beranda</a>
-          <a href="#">Destinasi Wisata</a>
-          <a href="#">Pilihan Paket Tour</a>
-          <a href="#">Sewa Kendaraan</a>
-          <a href="#">Artikel Wisata</a>
-          <a href="#">Tentang Kami</a>
+        {/* DESKTOP MENU - hidden di mobile */}
+        <nav className="hidden md:flex items-center mx-auto">
+          {navItems.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.name}
+                href={item.href}
+              className={`
+                relative text-sm font-medium text-[#2b2b2b] no-underline pb-2
+                transition-colors duration-200 hover:text-[#ff8a00]
+                before:content-[''] before:absolute before:left-1/2 before:bottom-0
+                before:w-0 before:h-[2px] before:bg-[#ff8a00] before:-translate-x-1/2
+                before:transition-all before:duration-300
+                hover:before:w-full
+                mx-4
+                ${isActive ? "before:w-full" : ""}
+              `}
+              >
+                {item.name}
+              </Link>
+            );
+          })}
         </nav>
+
+        {/* Spacer kanan (desktop) */}
+        <div className="hidden md:block w-[60px] shrink-0"></div>
+
+        {/* HAMBURGER BUTTON untuk mobile */}
+        <button
+          className="md:hidden z-20 p-2 focus:outline-none"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          <svg className="w-6 h-6 text-[#2b2b2b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {mobileMenuOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
       </div>
+
+      {/* MOBILE MENU - muncul saat hamburger diklik */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-[#fff3ea] border-t border-black/5 py-4 px-6 flex flex-col gap-4">
+          {navItems.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`
+                  text-sm font-medium text-[#2b2b2b] no-underline py-2
+                  transition-colors duration-200 hover:text-[#ff8a00]
+                  ${isActive ? "text-[#ff8a00] border-l-4 border-[#ff8a00] pl-3" : "pl-4"}
+                `}
+              >
+                {item.name}
+              </Link>
+            );
+          })}
+        </div>
+      )}
     </header>
   );
 }
