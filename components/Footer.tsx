@@ -69,7 +69,7 @@ export default function Footer() {
         {/* Copyright */}
         <div style={{ textAlign: "center", borderTop: "1px solid #374151", paddingTop: "24px", fontSize: "14px", color: "#9ca3af" }}>
           2026 | Majestic Of Java Tour & Travel<br />
-          Designed and Developed by David
+          Designed and Developed by David Kurniawan
         </div>
       </div>
     </footer>
