@@ -1,0 +1,6 @@
+[
+  { "id": 1, "name": "Ijen", "image": "/assets/images/ijen.jpg", "tours": 1 },
+  { "id": 2, "name": "Bali", "image": "/assets/images/bali.jpg", "tours": 3 },
+  { "id": 3, "name": "Baluran, Pantai Bama", "image": "/assets/images/baluran.jpg", "tours": 4 },
+  { "id": 4, "name": "Djawatan", "image": "/assets/images/djawatan.jpg", "tours": 3 }
+]
